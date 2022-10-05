@@ -13,7 +13,6 @@ app.use(express.urlencoded({ extended: true}));
 
 // setHeader('Access-Control-Allow-Origin', '*')
 
-
 const typeDefs = `
 type Item {
     id: ID!
@@ -25,8 +24,8 @@ type Item {
 
 type Query {
     allItems: [Item!]!
-}`
-
+}
+`
 
 const resolvers = {
   Query: {

@@ -1,7 +1,6 @@
 import './App.css'
+import useSWR from 'swr'
 import axios from 'axios'
-import { useEffect } from 'react'
-import useSWR, { useSWRConfig } from 'swr'
 import { ItemCard } from './components/ItemCard'
 
 
@@ -15,15 +14,9 @@ function App() {
     }
   }`
 
-  const { mutate } = useSWRConfig()
-  const { inventory, revalidate } = useSWR(url, async () => { 
+  const { data: inventory } = useSWR(url, async () => { 
     const res = await axios.post(url, { query });
     return res.data;
-  })
-
-  useEffect(() => {
-    // tell all SWRs with this key to revalidate
-    mutate(url)
   })
 
   return (
