@@ -9,7 +9,10 @@ function App() {
   const query = `{
     allItems {
       name
+      description
       avgPrice
+      image
+      banner
       unitOfMeasurement
     }
   }`
