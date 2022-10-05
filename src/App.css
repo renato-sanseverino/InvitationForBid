@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.header{
+  justify-content: center;
+}
+
+.main {
+  width: 60rem;
+  height: 25rem;
+  background-color: white;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.footer {
+  justify-content: center;
+}
