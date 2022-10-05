@@ -17,7 +17,10 @@ const typeDefs = `
 type Item {
     id: ID!
     name: String!
+    description: String
     avgPrice: Float!
+    image: String
+    banner: String
     unitOfMeasurement: String!
     itemGroup: Int
 }
