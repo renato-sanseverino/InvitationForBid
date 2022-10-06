@@ -1,5 +1,5 @@
-import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import { api, notification } from '../config/defaults.js'
 
 
