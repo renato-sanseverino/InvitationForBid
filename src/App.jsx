@@ -1,6 +1,7 @@
 import './App.css'
 import useSWR from 'swr'
 import axios from 'axios'
+import { ItemCard} from './components/ItemCard'
 import { ItemDetails} from './components/ItemDetails'
 
 
