@@ -1,7 +1,8 @@
 import prisma from '../config/db.js'
+import { gql } from 'apollo-server-micro'
 
 
-const typeDefs = `
+const typeDefs = gql`
 type Item {
     id: ID!
     name: String!

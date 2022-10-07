@@ -1,7 +1,10 @@
 import express from 'express'
 import { typeDefs, resolvers } from './models/item.js'
-import { graphqlHTTP } from 'express-graphql';
-import { makeExecutableSchema } from '@graphql-tools/schema';
+// ## Abandoned Express GraphQL middleware in favor of Vercel Serverless Function
+// ## The backend can still be run locally using Express to mimic the serverless environment
+// import { graphqlHTTP } from 'express-graphql';
+// import { makeExecutableSchema } from '@graphql-tools/schema';
+import { nextApi, nextRouter } from 'express-next-api'
 
 
 const port = 3000;
@@ -13,12 +16,10 @@ app.use(express.urlencoded({ extended: true}));
 
 // setHeader('Access-Control-Allow-Origin', '*')
 
-export const schema = makeExecutableSchema({
-  resolvers,
-  typeDefs,
-})
+// export const schema = makeExecutableSchema({ resolvers, typeDefs, })
+// app.use('/api/graphql', graphqlHTTP({ schema, }))
+app.use(nextApi({ base: '/api/routes', directory: 'routes', options: {caseSensitive: false} }))
 
-app.use('/api/graphql', graphqlHTTP({ schema, }));
 
 // inicia a API escutando na porta 3000
 app.listen(port, () => console.log('Express escutando chamadas na porta ' + port));
