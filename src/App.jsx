@@ -24,14 +24,26 @@ function App() {
     return res.data;
   })
 
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  }
+
   return (
-    <div className="App">
-      <div>{
-        // <Carousel></Carousel>
-        // inventory && inventory.data.allItems.map( (item) => <ItemCard item={item} key={item.id} /> )
-        (inventory) ? <ItemDetails item={inventory.data.allItems[0]} /> : <p>No items found</p>
-      }
-			</div>
+    <div className="App">{
+        (inventory) ?
+        <Carousel responsive={responsive}>{   // Not working as expected
+          inventory.data.allItems.map( (item) => <ItemCard item={item} key={item.id} /> )
+        }
+        </Carousel> :
+        <p>No items found</p>
+    }
     </div>
   )
 }
