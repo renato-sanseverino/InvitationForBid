@@ -1,14 +1,14 @@
-import './App.css'
 import useSWR from 'swr'
 import { useState } from 'react'
 import { fetcher2 } from './config/defaults'
 import Carousel from 'react-multi-carousel'
+import 'react-multi-carousel/lib/styles.css'
 import { ItemCard } from './components/ItemCard'
 import { ItemSelect } from './components/ItemSelect'
 import { ItemDetails } from './components/ItemDetails'
 
 
-const url = '/api/graphql';
+// const url = '/api/graphql'
 const query = `{
   allItems {
     name
@@ -18,7 +18,8 @@ const query = `{
     banner
     unitOfMeasurement
   }
-}`
+}
+`
 
 function App() {
   const { data: inventory, error, isValidating, mutate } = useSWR(query, fetcher2);
@@ -40,7 +41,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <>
       <div>
         <p><b>FIQUE A VONTADE PARA RETIRAR DE NOSSO SITE OS SERVIÇOS QUE ACHAR INCONVENIENTE</b></p>
         <ItemSelect parentRef={{mutate}} ></ItemSelect>
@@ -62,7 +63,7 @@ function App() {
         <p>No items found</p>
       }
       </div>
-    </div>
+    </>
   )
 }
 
