@@ -1,9 +1,10 @@
 import './App.css'
 import useSWR from 'swr'
-import axios from 'axios'
+import { fetcher2 } from './config/defaults'
 import Carousel from 'react-multi-carousel'
-import { ItemCard} from './components/ItemCard'
-import { ItemDetails} from './components/ItemDetails'
+import { ItemCard } from './components/ItemCard'
+import { ItemSelect } from './components/ItemSelect'
+import { ItemDetails } from './components/ItemDetails'
 
 
 function App() {
@@ -19,10 +20,7 @@ function App() {
     }
   }`
 
-  const { data: inventory } = useSWR(url, async () => { 
-    const res = await axios.post(url, { query });
-    return res.data;
-  })
+  const { data: inventory, error, isValidating, mutate } = useSWR(query, fetcher2)
 
   const responsive = {
     desktop: {
@@ -36,14 +34,23 @@ function App() {
   }
 
   return (
-    <div className="App">{
+    <div className="App">
+      <div>
+        <p><b>FIQUE A VONTADE PARA RETIRAR DE NOSSO SITE OS SERVIÇOS QUE ACHAR INCONVENIENTE</b></p>
+        <ItemSelect parentRef={{mutate}} ></ItemSelect>
+      </div>
+
+      <div>{
         (inventory) ?
         <Carousel responsive={responsive}>{   // Not working as expected
           inventory.data.allItems.map( (item) => <ItemCard item={item} key={item.id} /> )
         }
         </Carousel> :
         <p>No items found</p>
-    }
+      }
+      </div>
+
+
     </div>
   )
 }
