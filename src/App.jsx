@@ -1,5 +1,6 @@
 import './App.css'
 import useSWR from 'swr'
+import { useState } from 'react'
 import { fetcher2 } from './config/defaults'
 import Carousel from 'react-multi-carousel'
 import { ItemCard } from './components/ItemCard'
@@ -20,7 +21,8 @@ function App() {
     }
   }`
 
-  const { data: inventory, error, isValidating, mutate } = useSWR(query, fetcher2)
+  const { data: inventory, error, isValidating, mutate } = useSWR(query, fetcher2);
+  const [currentItem, setCurrentItem] = useState(0);
 
   const responsive = {
     desktop: {
@@ -42,7 +44,7 @@ function App() {
 
       <div>{
         (inventory) ?
-        <Carousel responsive={responsive}>{   // Not working as expected
+        <Carousel responsive={responsive}>{
           inventory.data.allItems.map( (item) => <ItemCard item={item} key={item.id} /> )
         }
         </Carousel> :
@@ -50,7 +52,12 @@ function App() {
       }
       </div>
 
-
+      <div>{
+        (inventory) ?
+        <ItemDetails item={inventory.data.allItems[currentItem]} /> :
+        <p>No items found</p>
+      }
+      </div>
     </div>
   )
 }
