@@ -16,7 +16,7 @@
   "author": "Renato R. Sanseverino",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^4.1.1",
+    "@prisma/client": "^4.4.0",
     "express": "^4.18.1",
     "express-graphql": "^0.12.0",
     "@graphql-tools/schema": "^9.0.4"

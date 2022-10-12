@@ -1,8 +1,7 @@
 import prisma from '../config/db.js'
-import { gql } from 'apollo-server-micro'
 
 
-const typeDefs = gql`
+const typeDefs = `
 type Item {
     id: ID!
     name: String!
@@ -17,13 +16,28 @@ type Item {
 type Query {
     allItems: [Item!]!
 }
+
+type Mutation {
+  # createItem(id: ID!, name: String!, avgPrice: Float!): Item!
+  deleteItem(id: Int!): Int
+  # updateItem(id: Int!): Int
+}
 `
 
 const resolvers = {
   Query: {
     allItems: () => {
-      return prisma.item.findMany()
+      return prisma.item.findMany();
     }
+  },
+
+  Mutation: {
+    deleteItem: async (parent, args) => {
+      await prisma.item.delete({
+        where: { id: args.id },
+      })
+      return args.id;
+    },
   }
 }
 
