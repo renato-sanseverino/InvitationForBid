@@ -1,4 +1,6 @@
 import { typeDefs, resolvers } from '../models/item'
+
+/*
 import { ApolloServer, gql } from 'apollo-server-micro'
 
 
@@ -21,3 +23,4 @@ export const config = {
       bodyParser: false,
     },
 }
+*/
