@@ -35,3 +35,12 @@
   color: #FFFFFF;
   text-shadow: blue 0.2em 0.2em 0.2em;
 }
+
+.textfield{
+  color: white;
+  text-shadow: black 0.1em 0.1em 0.1em;
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

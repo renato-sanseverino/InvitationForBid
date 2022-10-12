@@ -1,18 +1,21 @@
-import { useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
-import { fetcher2, notification } from '../config/defaults.js'
+import '../App.css'
+import React from 'react'
 
 
 export const ItemCard = ({ item, index, parentRef }) => {
+	const onClick = (e) => {
+		parentRef.handleClick(index)
+	}
 
 	return (
 		<>
-			<Toaster/>
-
-			<div className="p-8 border-solid border-2 rounded-lg" >
-				<h2 className="text-2xl font-bold">{item.name}</h2>
-				<img className="w-40 h-20" src={item.image} ></img>
-				<p>Preço Médio: R$ {item.avgPrice}</p>
+			<div className='inline w-72 h-52' onClick={onClick} >
+				<img className='absolute z-10 rounded-lg w-full h-full ' src={item.image} ></img>
+				<fieldset className='absolute z-20 flex flex-col justify-center' style={{'border': '0'}}>
+					<h2 className='textfield'>{item.name}</h2>
+					<p className='textfield'>Preço Médio: R$ {item.avgPrice}</p>
+					<p className='textfield'>{item.description}</p>
+				</fieldset>
 			</div>
 		</>
 	)

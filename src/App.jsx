@@ -8,31 +8,35 @@ import { ItemSelect } from './components/ItemSelect'
 import { ItemDetails } from './components/ItemDetails'
 
 
-function App() {
-  const url = '/api/graphql';
-  const query = `{
-    allItems {
-      name
-      description
-      avgPrice
-      image
-      banner
-      unitOfMeasurement
-    }
-  }`
+const url = '/api/graphql';
+const query = `{
+  allItems {
+    name
+    description
+    avgPrice
+    image
+    banner
+    unitOfMeasurement
+  }
+}`
 
+function App() {
   const { data: inventory, error, isValidating, mutate } = useSWR(query, fetcher2);
   const [currentItem, setCurrentItem] = useState(0);
 
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3
+      items: 4
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1
     }
+  }
+
+  const handleClick = (itemIndex) => {
+    setCurrentItem(itemIndex)
   }
 
   return (
@@ -44,9 +48,9 @@ function App() {
 
       <div>{
         (inventory) ?
-        <Carousel responsive={responsive}>{
-          inventory.data.allItems.map( (item) => <ItemCard item={item} key={item.id} /> )
-        }
+        <Carousel responsive={responsive}>{  inventory.data.allItems.map(
+            (item, index) => <ItemCard item={item} index={index} parentRef={{handleClick}} key={item.id} />
+        )}
         </Carousel> :
         <p>No items found</p>
       }
