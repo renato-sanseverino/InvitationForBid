@@ -4,7 +4,6 @@ import { fetcher2, notification } from '../config/defaults.js'
 
 
 export const ItemCard = ({ item, index, parentRef }) => {
-	const [deal, setDeal] = useState(item)
 
 	return (
 		<>
