@@ -9,14 +9,12 @@ export const ItemCard = ({ item, index, parentRef }) => {
 	}
 
 	return (
-		<div style={{'var(--image-url)': item.image}}>
-			<div className='w-72 h-52 rounded-lg bg-[image:var(--image-url)]'>
-				<fieldset className="flex flex-col justify-center" onClick={onClick}>
-					<h2 className='textfield font-bold text-2xl'>{item.name}</h2>
-					<p className='textfield font-bold text-xl'>Preço Médio: R$ {item.avgPrice}</p>
-					<p className='textfield'>{item.description}</p>
-				</fieldset>
-			</div>
+		<div className="w-80 h-52 rounded-lg" style={{ backgroundImage: `url(${item.image})` }} onClick={onClick} >
+			<fieldset className="flex flex-col justify-center">
+				<h2 className="textfield font-bold text-2xl">{item.name}</h2>
+				<p className="textfield font-bold text-xl">Preço Médio: R$ {item.avgPrice}</p>
+				<p className="textfield">{item.description}</p>
+			</fieldset>
 		</div>
 	)
 }
