@@ -3,20 +3,20 @@ import React from 'react'
 
 
 export const ItemCard = ({ item, index, parentRef }) => {
+
 	const onClick = (e) => {
 		parentRef.handleClick(index)
 	}
 
 	return (
-		<>
-			<div className="inline w-72 h-52" onClick={onClick} >
-				<img className="absolute z-10 rounded-lg w-72 h-52" src={item.image} ></img>
-				<fieldset className="absolute z-20 flex flex-col justify-center" style={{'border': '0'}}>
-					<h2 className='textfield'>{item.name}</h2>
-					<p className='textfield'>Preço Médio: R$ {item.avgPrice}</p>
+		<div style={{'var(--image-url)': item.image}}>
+			<div className='w-72 h-52 rounded-lg bg-[image:var(--image-url)]'>
+				<fieldset className="flex flex-col justify-center" onClick={onClick}>
+					<h2 className='textfield font-bold text-2xl'>{item.name}</h2>
+					<p className='textfield font-bold text-xl'>Preço Médio: R$ {item.avgPrice}</p>
 					<p className='textfield'>{item.description}</p>
 				</fieldset>
 			</div>
-		</>
+		</div>
 	)
 }
