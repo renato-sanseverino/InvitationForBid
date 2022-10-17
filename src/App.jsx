@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { fetcher2 } from './config/defaults'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
+import { Layout } from './components/Layout'
 import { ItemCard } from './components/ItemCard'
 import { ItemSelect } from './components/ItemSelect'
 import { ItemDetails } from './components/ItemDetails'
@@ -41,7 +42,7 @@ function App() {
   }
 
   return (
-    <>
+    <Layout>
       <div>
         <p><b>FIQUE A VONTADE PARA RETIRAR DE NOSSO SITE OS SERVIÇOS QUE ACHAR INCONVENIENTE</b></p>
         <ItemSelect parentRef={{mutate}} ></ItemSelect>
@@ -63,7 +64,7 @@ function App() {
         <p>No items found</p>
       }
       </div>
-    </>
+    </Layout>
   )
 }
 
