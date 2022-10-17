@@ -1,7 +1,7 @@
 import express from 'express'
-import { typeDefs, resolvers } from './models/item.js'
-import { graphqlHTTP } from 'express-graphql';
-import { makeExecutableSchema } from '@graphql-tools/schema';
+import { typeDefs, resolvers } from './models/all.js'
+import { graphqlHTTP } from 'express-graphql'
+import { makeExecutableSchema } from '@graphql-tools/schema'
 // import { nextApi, nextRouter } from 'express-next-api'
 
 
