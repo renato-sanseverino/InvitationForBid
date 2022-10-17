@@ -1,4 +1,4 @@
-import { typeDefs, resolvers } from '../models/item'
+import { typeDefs, resolvers } from '../models/all'
 
 /*
 import { ApolloServer, gql } from 'apollo-server-micro'
