@@ -12,6 +12,8 @@ model contractor {
   companyName   String  @db.VarChar(250)
   email         String  @db.VarChar(120)
   contactPerson String? @db.VarChar(250)
+  logoImage     String? @db.LongText
+  imgFormat     String? @db.VarChar(45)
 }
 
 model item {
