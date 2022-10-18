@@ -18,6 +18,11 @@ export const schema = makeExecutableSchema({ resolvers, typeDefs, })
 app.use('/api/graphql', graphqlHTTP({ schema, }))
 // app.use(nextApi({ base: '/api/routes', directory: 'routes', options: {caseSensitive: false} }))
 
+// Redireciona para o react-router rotas não encontradas no Express
+app.get('*', (req, res) => {
+    res.sendFile('index.html', { root: '../dist' })
+})
+
 
 // inicia a API escutando na porta 3000
 app.listen(port, () => console.log('Express escutando chamadas na porta ' + port));
