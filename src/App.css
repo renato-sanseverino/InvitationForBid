@@ -8,22 +8,6 @@
   margin: 0;
 }
 
-.header{
-  justify-content: center;
-}
-
-.main {
-  width: 60rem;
-  height: 25rem;
-  background-color: white;
-  margin: 1rem;
-  padding: 1rem;
-}
-
-.footer {
-  justify-content: center;
-}
-
 .title {
   font-size: 50px;
   color: #FFCCCC;
