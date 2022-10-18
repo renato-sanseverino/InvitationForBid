@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import React, { useState } from 'react'
-import { fetcher2 } from '../config/defaults'
-import { mutation } from '../config/mutation'
+import { fetcher2 } from '../utils/defaults'
+import { mutation } from '../utils/mutation'
 
 
 const query = `{
