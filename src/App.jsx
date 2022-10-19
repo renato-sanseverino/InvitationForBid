@@ -2,7 +2,7 @@ import Home from './pages/Home'
 import Items from './pages/Items'
 import Contractors from './pages/Contractors'
 import React, { useEffect } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 
 
 export default function App() {
@@ -17,6 +17,7 @@ export default function App() {
   return (
     <>
       <Routes>
+        <Route path="*" element={<Navigate to="/" replace />} />
         <Route exact path="/" element={<Home />} />
         <Route path="/items" element={<Items />} />
         <Route path="/contractors" element={<Contractors />} />

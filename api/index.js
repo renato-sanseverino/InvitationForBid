@@ -19,6 +19,7 @@ app.use('/api/graphql', graphqlHTTP({ schema, }))
 // app.use(nextApi({ base: '/api/routes', directory: 'routes', options: {caseSensitive: false} }))
 
 // Redireciona para o react-router rotas não encontradas no Express
+// No react-router ( frontend ) redirecionar rotas inexistentes para a raiz
 app.get('*', (req, res) => {
     res.sendFile('index.html', { root: '../dist' })
 })
