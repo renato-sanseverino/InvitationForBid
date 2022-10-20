@@ -44,9 +44,9 @@ export default function ContractorForm({id, parentRef}) {
 
 		try {
 			if (id === undefined) {
-                mutation(`createContractor(data: ${contractor})`)
+                mutation(`createContractor(${JSON.stringify(contractor)})`)
 			} else {
-                mutation(`updateContractor(data: ${contractor})`)
+                mutation(`updateContractor(${JSON.stringify(contractor)})`)
 			}
 		} catch (error) {
 			toast.error(error.message, notification.options);
