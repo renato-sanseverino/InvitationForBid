@@ -68,7 +68,7 @@ export default function ContractorForm({id, parentRef}) {
 			reader.onloadend = () => {
 				const fileData = reader.result.split(';base64,');
 				let formato = fileData[0].replace('data:', '') + ';base64'
-				setContractor({...contractor, 'logoImage': fileData[1], 'imageFormat': formato, })
+				setContractor({...contractor, 'logoImage': fileData[1], 'imgFormat': formato, })
 			}
 			reader.readAsDataURL(file);
 		}
@@ -94,7 +94,6 @@ export default function ContractorForm({id, parentRef}) {
 						onChange={onChange}
 					/>
 				</div>
-
 				<div className="mb-4">
 					<label htmlFor="email" className="block text-gray-700 text-sm font-bold md-2">
 						E-mail
@@ -102,6 +101,17 @@ export default function ContractorForm({id, parentRef}) {
 					<input type="text"
 						name="email"
 						value={contractor.email}
+						className="shadow appearance  border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+						onChange={onChange}
+					/>
+				</div>
+				<div className="mb-4">
+					<label htmlFor="contactPerson" className="block text-gray-700 text-sm font-bold md-2">
+						Contact Person
+					</label>
+					<input type="text"
+						name="contactPerson"
+						value={contractor.contactPerson}
 						className="shadow appearance  border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 						onChange={onChange}
 					/>
