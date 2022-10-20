@@ -8,14 +8,13 @@ import { fetcher2, notification } from '../utils/defaults'
 
 
 // const url = '/api/graphql'
-const getContractor = (id) => `{
-    getContractor(id: ${id}) {
-      companyName
-      email
-      contactPerson
-      logoImage
-      imgFormat
-    }
+const getContractor = (id) => `
+getContractor(id: ${id}) {
+  companyName
+  email
+  contactPerson
+  logoImage
+  imgFormat
 }
 `
 

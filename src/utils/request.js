@@ -9,8 +9,9 @@ const request = (query) => {
           Accept: '*/*',
           'Content-Type': 'application/json',
         },
-        data: `{"query": ${query} }`
+        data: `{"query": "query { ${JSON.parse(query)} }"}`
     }
+    console.log(options.data)
 
     return axios.request(options)
 }
