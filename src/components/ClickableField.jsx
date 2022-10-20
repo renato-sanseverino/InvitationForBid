@@ -1,13 +1,15 @@
 import React from 'react'
+import ReactDom from 'react-dom'
+import ContractorForm from './ContractorForm'
 
 
 export default function ClickableField({ rowId, label, parentRef }) {
 
 	const handleClick = () => {
-        // const root = ReactDom.createRoot(document.getElementById('panel'));
+        const root = ReactDom.createRoot(document.getElementById('panel'));
 
-        // const contractorForm = React.createElement(ContractorForm, { id: rowId, parentRef: parentRef }, null);
-		// root.render(contractorForm);
+        const contractorForm = React.createElement(ContractorForm, { id: rowId, parentRef: parentRef }, null);
+		root.render(contractorForm);
 	}
 
 	return (

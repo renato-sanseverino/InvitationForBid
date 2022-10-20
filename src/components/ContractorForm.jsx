@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Dialog } from '@mui/material'
 import Draggable from 'react-draggable'
 import toast, { Toaster } from 'react-hot-toast'
+import { request } from '../utils/request'
 import { mutation } from '../utils/mutation'
 import { fetcher2, notification } from '../utils/defaults'
 
@@ -25,9 +26,6 @@ export default function ContractorForm({id, parentRef}) {
 		setOpen(false);
 	}
 
-    // TODO : refatorar usando  useSWR( )
-    // const query = getContractor(id);
-    // const { data: contractor, error, isValidating, mutate } = useSWR(query, fetcher2)
 	const [contractor, setContractor] = useState({
         "companyName": "",
         "email": "",
@@ -75,6 +73,15 @@ export default function ContractorForm({id, parentRef}) {
 
 		setContractor({...contractor, [e.target.name]: e.target.value, })
 	}
+
+	useEffect(() => {
+		if (id) {
+			const query = getContractor(id);
+			request(query)
+			.then((response) => setContractor(response.data.getContractor))
+			.catch((error) => toast.error(error, notification.options))
+		}
+	}, []);
 
 	return (
 	<>
