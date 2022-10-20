@@ -72,7 +72,7 @@ export default function ContractorList() {
 
 		<Button variant="outlined" startIcon={<DeleteIcon />} onClick={deleteContractor} >Excluir</Button>
 		<Button variant="outlined" startIcon={<AddCircleIcon />} onClick={insertContractor} >Novo</Button>
-		<div>{
+		<div className="w-full h-96 overscroll-none">{
 			contractors ?
 			<DataGrid columns={columns} rows={contractors.data.allContractors} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection
 				onSelectionModelChange={setSelectionModel} selectionModel={selectionModel} /> :
