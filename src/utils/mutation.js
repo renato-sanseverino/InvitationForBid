@@ -7,10 +7,11 @@ const mutation = (query) => {
         url: '/api/graphql',
         headers: {
           Accept: '*/*',
-          'Content-Type': 'application/json',
+          'Content-Type': 'text/plain',
         },
         data: `{"query": "mutation { ${query} }"}`
     }
+    console.log(options.data)
 
     return axios.request(options)
 }

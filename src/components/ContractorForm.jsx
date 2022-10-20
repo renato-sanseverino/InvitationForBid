@@ -18,6 +18,15 @@ getContractor(id: ${id}) {
 }
 `
 
+const getObjectProperties = (obj) => {
+  let objProps = '';
+  for (const [key, value] of Object.entries(obj)) {
+	objProps += `${key}:"${value}",`;
+  }
+  return objProps;
+}
+
+
 export default function ContractorForm({id, parentRef}) {
 	const [open, setOpen] = useState(true);
 
@@ -42,10 +51,11 @@ export default function ContractorForm({id, parentRef}) {
 		}
 
 		try {
+			let mutationArguments = getObjectProperties(contractor);
 			if (id === undefined) {
-                mutation(`createContractor(${JSON.stringify(contractor)})`)
+                mutation(`createContractor(${mutationArguments})`)
 			} else {
-                mutation(`updateContractor(${JSON.stringify(contractor)})`)
+                mutation(`updateContractor(${mutationArguments})`)
 			}
 		} catch (error) {
 			toast.error(error.message, notification.options);
@@ -64,8 +74,9 @@ export default function ContractorForm({id, parentRef}) {
 			const reader = new FileReader();
 			reader.onloadend = () => {
 				const fileData = reader.result.split(';base64,');
-				let formato = fileData[0].replace('data:', '') + ';base64'
-				setContractor({...contractor, 'logoImage': fileData[1], 'imgFormat': formato, })
+				let fileFormat = fileData[0].replace('data:', '') + ';base64'
+				let fileContents = fileData[1];
+				setContractor({...contractor, 'logoImage': `4AAQSkZJRgABA...` , 'imgFormat': fileFormat, })
 			}
 			reader.readAsDataURL(file);
 		}

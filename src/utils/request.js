@@ -9,7 +9,7 @@ const request = (query) => {
           Accept: '*/*',
           'Content-Type': 'application/json',
         },
-        data: `{"query": "query { ${JSON.parse(query)} }"}`
+        data: `{"query": "query { ${query} }"}`
     }
     console.log(options.data)
 
