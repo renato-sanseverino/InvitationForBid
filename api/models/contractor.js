@@ -12,6 +12,7 @@ type Contractor {
 }
 
 extend type Query {
+    getContractor(id: Int!): Contractor!
     allContractors: [Contractor!]!
 }
 
@@ -24,6 +25,9 @@ extend type Mutation {
 
 const resolvers = {
   Query: {
+    getContractor: (parent, args) => {
+      return prisma.contractor.findUnique({ where: { id: parseInt(args.id) } })
+    },
     allContractors: () => {
       return prisma.contractor.findMany()
     }
