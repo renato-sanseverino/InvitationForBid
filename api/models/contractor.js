@@ -12,7 +12,7 @@ type Contractor {
 }
 
 extend type Query {
-    getContractor(id: Int!): Contractor!
+    getContractor(id: Int): Contractor
     allContractors: [Contractor!]!
 }
 

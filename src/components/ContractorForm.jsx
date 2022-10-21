@@ -7,17 +7,6 @@ import { mutation } from '../utils/mutation'
 import { fetcher2, notification } from '../utils/defaults'
 
 
-// const url = '/api/graphql'
-const getContractor = (id) => `
-getContractor(id: ${id}) {
-  companyName
-  email
-  contactPerson
-  logoImage
-  imgFormat
-}
-`
-
 export default function ContractorForm({id, parentRef}) {
 	const [open, setOpen] = useState(true);
 
@@ -76,8 +65,8 @@ export default function ContractorForm({id, parentRef}) {
 
 	useEffect(() => {
 		if (id) {
-			const query = getContractor(id);
-			request(query)
+			const returnFields = ['companyName', 'email', 'contactPerson', 'logoImage', 'imgFormat']
+			request(`getContractor`, { id: parseInt(id) }, returnFields)
 			.then((response) => setContractor(response.data.getContractor))
 			.catch((error) => toast.error(error, notification.options))
 		}

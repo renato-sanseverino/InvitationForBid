@@ -1,19 +1,9 @@
-import axios from 'axios'
+import axios from "axios";
+import { query as queryBuilder } from "gql-query-builder";
 
 
-const request = (query) => {
-    const options = {
-        method: 'POST',
-        url: '/api/graphql',
-        headers: {
-          Accept: '*/*',
-          'Content-Type': 'application/json',
-        },
-        data: `{"query": "query { ${query} }"}`
-    }
-    console.log(options.data)
-
-    return axios.request(options)
+const request = (requestOperation, requestVariables, requestFields) => {
+    return axios.post('/api/graphql', queryBuilder({ operation: requestOperation, variables: requestVariables, fields: requestFields }))
 }
 
 export { request }
