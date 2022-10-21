@@ -18,15 +18,6 @@ getContractor(id: ${id}) {
 }
 `
 
-const getObjectProperties = (obj) => {
-  let objProps = '';
-  for (const [key, value] of Object.entries(obj)) {
-	objProps += `${key}:\"${value}\",`;   // escape double quotes to avoid problems with graphql/json specs
-  }
-  return objProps;
-}
-
-
 export default function ContractorForm({id, parentRef}) {
 	const [open, setOpen] = useState(true);
 
@@ -51,11 +42,11 @@ export default function ContractorForm({id, parentRef}) {
 		}
 
 		try {
-			let mutationArguments = getObjectProperties(contractor);
+			let mutationArguments = `$companyName: String!, $email: String!, $contactPerson: String!, $logoImage: String, $imgFormat: String`
 			if (id === undefined) {
-                mutation(`createContractor(${mutationArguments})`)
+                mutation(`createContractor(${mutationArguments}) { int }`, contractor)
 			} else {
-                mutation(`updateContractor(${mutationArguments})`)
+                mutation(`updateContractor(${mutationArguments}) { int }`, contractor)
 			}
 		} catch (error) {
 			toast.error(error.message, notification.options);
@@ -76,7 +67,7 @@ export default function ContractorForm({id, parentRef}) {
 				const fileData = reader.result.split(';base64,');
 				let fileFormat = fileData[0].replace('data:', '') + ';base64'
 				let fileContents = fileData[1];
-				setContractor({...contractor, 'logoImage': `4AAQSkZJRgABA...` , 'imgFormat': fileFormat, })
+				setContractor({...contractor,'imgFormat': fileFormat, 'logoImage': fileContents, })
 			}
 			reader.readAsDataURL(file);
 		}
