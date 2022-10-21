@@ -19,7 +19,7 @@ export const ItemSelect = ({parentRef}) => {
     const deleteItem = () => {
         // const message = 'Deseja realmente excluir o item ?';
 
-        mutation(`deleteItem(id: $id)`, { id: parseInt(selected) })
+        mutation(`deleteItem`, { id: parseInt(selected) })
         .then( (response) => {
             mutate() // atualiza as opções do dropdown
             parentRef.mutate() // atualiza o componente pai

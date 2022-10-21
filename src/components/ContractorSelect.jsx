@@ -19,7 +19,7 @@ export const ContractorSelect = ({parentRef}) => {
     const deleteContractor = () => {
         // const message = 'Deseja realmente excluir a empresa ?';
 
-        mutation(`deleteContractor(id: $id)`, { id: parseInt(selected) })
+        mutation(`deleteContractor`, { id: parseInt(selected) })
         .then( (response) => {
             mutate() // atualiza as opções do dropdown
             parentRef.mutate() // atualiza o componente pai

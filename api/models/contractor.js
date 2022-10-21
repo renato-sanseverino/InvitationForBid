@@ -18,7 +18,7 @@ extend type Query {
 
 extend type Mutation {
   createContractor(companyName: String!, email: String!, contactPerson: String!, logoImage: String, imgFormat: String): Int
-  deleteContractor(id: Int!): Int
+  deleteContractor(id: Int): Int
   # updateContractor(id: Int!): Int
 }
 `

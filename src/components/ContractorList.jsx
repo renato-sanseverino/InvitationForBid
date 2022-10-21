@@ -58,7 +58,7 @@ export default function ContractorList() {
 	const handleResult = (result) => {
         // apos confirmação exlcui os registros
 		if (result) {
-			const promises = selectionModel.map(async (id) => { mutation(`deleteContractor(id: ${id})`) } )
+			const promises = selectionModel.map(async (id) => { mutation(`deleteContractor`, { id: parseInt(id) }, ) })
 			Promise.all(promises)
 				.then(() => { mutate() } )  // Refresh da lista de Contractors
 				.catch((error) => { toast.error(error.message) })
