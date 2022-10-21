@@ -7,7 +7,7 @@ const mutation = (query) => {
         url: '/api/graphql',
         headers: {
           Accept: '*/*',
-          'Content-Type': 'text/plain',
+          'Content-Type': 'application/json',
         },
         data: `{"query": "mutation { ${query} }"}`
     }

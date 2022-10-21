@@ -21,7 +21,7 @@ getContractor(id: ${id}) {
 const getObjectProperties = (obj) => {
   let objProps = '';
   for (const [key, value] of Object.entries(obj)) {
-	objProps += `${key}:"${value}",`;
+	objProps += `${key}:\"${value}\",`;   // escape double quotes to avoid problems with graphql/json specs
   }
   return objProps;
 }
