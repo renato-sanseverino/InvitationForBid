@@ -42,11 +42,10 @@ export default function ContractorForm({id, parentRef}) {
 		}
 
 		try {
-			let mutationArguments = `$companyName: String!, $email: String!, $contactPerson: String!, $logoImage: String, $imgFormat: String`
 			if (id === undefined) {
-                mutation(`createContractor(${mutationArguments}) { int }`, contractor)
+                mutation(`createContractor`, contractor)
 			} else {
-                mutation(`updateContractor(${mutationArguments}) { int }`, contractor)
+                mutation(`updateContractor`, contractor)
 			}
 		} catch (error) {
 			toast.error(error.message, notification.options);
