@@ -1,36 +1,36 @@
-import useSWR from 'swr'
 import ReactDom from 'react-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import toast, { Toaster } from "react-hot-toast";
-import { mutation} from '../utils/mutation';
-import { fetcher2, notification } from '../utils/defaults';
+import { request } from '../utils/request';
+import { mutation } from '../utils/mutation';
+import { notification } from '../utils/defaults';
 import ClickableField from './ClickableField';
 import ContractorForm from './ContractorForm';
 import ConfirmationDialog from './ConfirmationDialog';
 
 
-// const url = '/api/graphql'
-const query = `{
-  allContractors {
-    id
-    companyName
-    email
-    contactPerson
-  }
-}
-`
-
 export default function ContractorList() {
-    const { data: contractors, error, isValidating, mutate } = useSWR(query, fetcher2)
+	const [contractors, setContractors] = useState([]);
+
+	const getContractors = async () => {
+      const returnFields = ['id', 'companyName', 'email', 'contactPerson']
+	  request('allContractors', null, returnFields)
+	  .then((response) => setContractors(response.data.data.allContractors))
+	  .catch((error) => console.log(error))
+	}
+
+	useEffect(() => {
+	  getContractors()
+	}, []);
 
     const columns = [
 		{ field: 'id', headerName: 'Id', width: 80 },
 		{ field: 'companyName', headerName: 'Company Name', width: 250, renderCell: (params) => 
-			<ClickableField rowId={params.row.id} label={params.row.companyName} parentRef={{mutate}}></ClickableField> },
+			<ClickableField rowId={params.row.id} label={params.row.companyName} parentRef={{ getContractors }}></ClickableField> },
 		{ field: 'email', headerName: 'E-mail', width: 250 },
 		{ field: 'contactPerson', headerName: 'Contact Person', width: 250 }
 	]
@@ -38,7 +38,7 @@ export default function ContractorList() {
 	function insertContractor() {
         const root = ReactDom.createRoot(document.getElementById('panel'));
 
-        const contractorForm = React.createElement(ContractorForm, {id: undefined, parentRef: { mutate } }, null);
+        const contractorForm = React.createElement(ContractorForm, {id: undefined, parentRef: { getContractors } }, null);
 		root.render(contractorForm);
 	}
 
@@ -60,7 +60,7 @@ export default function ContractorList() {
 		if (result) {
 			const promises = selectionModel.map(async (id) => { mutation(`deleteContractor`, { id: parseInt(id) }, ) })
 			Promise.all(promises)
-				.then(() => { mutate() } )  // Refresh da lista de Contractors
+				.then(() => { getContractors() } )  // Refresh da lista de Contractors
 				.catch((error) => { toast.error(error.message) })
 		}		
 	}
@@ -75,7 +75,7 @@ export default function ContractorList() {
 		<Button variant="outlined" startIcon={<AddCircleIcon />} onClick={insertContractor} >Novo</Button>
 		<div className="w-full h-96 overscroll-none">{
 			contractors ?
-			<DataGrid columns={columns} rows={contractors.data.allContractors} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection
+			<DataGrid columns={columns} rows={contractors} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection
 				onSelectionModelChange={setSelectionModel} selectionModel={selectionModel} /> :
 			<p>No contractors found</p>
 		}

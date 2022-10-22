@@ -42,7 +42,7 @@ export default function ContractorForm({id, parentRef}) {
 		}
 
 		toast.success('Registro salvo com sucesso', notification.options);
-		parentRef.mutate();  // Refresh da lista de Contractors
+		parentRef.getContractors();  // Refresh da lista de Contractors
 		close();
 	}
 
@@ -67,7 +67,7 @@ export default function ContractorForm({id, parentRef}) {
 		if (id) {
 			const returnFields = ['companyName', 'email', 'contactPerson', 'logoImage', 'imgFormat']
 			request(`getContractor`, { id: parseInt(id) }, returnFields)
-			.then((response) => setContractor(response.data.getContractor))
+			.then((response) => setContractor(response.data.data.getContractor))
 			.catch((error) => toast.error(error, notification.options))
 		}
 	}, []);
