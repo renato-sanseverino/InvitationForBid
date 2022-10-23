@@ -65,8 +65,15 @@ export default function ContractorForm({id, parentRef}) {
 
 	useEffect(() => {
 		if (id) {
-			const returnFields = ['companyName', 'email', 'contactPerson', 'logoImage', 'imgFormat']
-			request(`getContractor`, { id: parseInt(id) }, returnFields)
+			// const url = '/api/graphql'
+			const query = `getContractor(id: ${parseInt(id)}) {
+				companyName
+				email
+				contactPerson
+				logoImage
+				imgFormat
+			}`
+			request(query)
 			.then((response) => setContractor(response.data.data.getContractor))
 			.catch((error) => toast.error(error, notification.options))
 		}
