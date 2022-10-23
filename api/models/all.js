@@ -1,6 +1,6 @@
-import { typeDefs as itemTypes, resolvers as itemResolvers } from './item';
-import { typeDefs as itemGroupTypes, resolvers as itemGroupResolvers} from './itemGroup';
-import { typeDefs as contractorTypes, resolvers as contractorResolvers } from './contractor';
+import { typeDefs as itemTypes, resolvers as itemResolvers } from './item.js';
+import { typeDefs as itemGroupTypes, resolvers as itemGroupResolvers} from './itemGroup.js';
+import { typeDefs as contractorTypes, resolvers as contractorResolvers } from './contractor.js';
 
 
 const versionTypes =  `type Query { version: String } type Mutation { setVersion: String }`
