@@ -43,6 +43,7 @@ export default function ContractorForm({id, parentRef}) {
 
 		toast.success('Registro salvo com sucesso', notification.options);
 		parentRef.getContractors();  // Refresh da lista de Contractors
+		console.log(parentRef.getContractors);
 		close();
 	}
 

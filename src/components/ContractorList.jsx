@@ -27,9 +27,8 @@ export default function ContractorList() {
 	const [contractors, setContractors] = useState([]);
 
 	const getContractors = async () => {
-	  request(query)
-	  .then((response) => setContractors(response.data.data.allContractors))
-	  .catch((error) => console.log(error))
+      const { data: response } = await request(query);
+	  setContractors(response.data.allContractors);
 	}
 
 	useEffect(() => {
@@ -82,12 +81,9 @@ export default function ContractorList() {
 
 		<Button variant="outlined" startIcon={<DeleteIcon />} onClick={deleteContractor} >Excluir</Button>
 		<Button variant="outlined" startIcon={<AddCircleIcon />} onClick={insertContractor} >Novo</Button>
-		<div className="w-full h-96 overscroll-none">{
-			contractors ?
+		<div className="w-full h-96 overscroll-none">
 			<DataGrid columns={columns} rows={contractors} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection
-				onSelectionModelChange={setSelectionModel} selectionModel={selectionModel} /> :
-			<p>No contractors found</p>
-		}
+				onSelectionModelChange={setSelectionModel} selectionModel={selectionModel} />
 		</div>
 	</>
 	)
