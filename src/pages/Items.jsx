@@ -7,6 +7,7 @@ import { Layout } from '../components/Layout'
 import { ItemCard } from '../components/ItemCard'
 import { ItemSelect } from '../components/ItemSelect'
 import { ItemDetails} from '../components/ItemDetails'
+import { GroupManagement } from '../components/GroupManagement'
 
 
 // const url = '/api/graphql'
@@ -46,6 +47,7 @@ function App() {
       <div>
         <p><b>FIQUE A VONTADE PARA RETIRAR DE NOSSO SITE OS SERVIÇOS QUE ACHAR INCONVENIENTE</b></p>
         <ItemSelect parentRef={{mutate}} ></ItemSelect>
+        <GroupManagement></GroupManagement>
       </div>
 
       <div>{
