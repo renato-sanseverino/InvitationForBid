@@ -1,5 +1,6 @@
 import React from 'react'
 import { Layout } from '../components/Layout'
+// const DataGrid = await import('https://unpkg.com/browse/devextreme-react@22.1.6/data-grid')
 
 
 export default function Home() {
