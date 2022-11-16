@@ -1,7 +1,9 @@
 import useSWR from 'swr'
+import ReactDom from 'react-dom'
 import React, { useState } from 'react'
 import { fetcher2 } from '../utils/defaults'
 import { mutation } from '../utils/mutation'
+import ItemForm from '../components/ItemForm'
 
 
 const query = `{
@@ -16,6 +18,13 @@ export const ItemSelect = ({parentRef}) => {
     const [selected, setSelected] = useState(0);
     const { data: inventory, error, isValidating, mutate } = useSWR(query, fetcher2)
 
+    const createItem = () => {
+        const root = ReactDom.createRoot(document.getElementById('panel'));
+
+        const itemForm = React.createElement(ItemForm, { id: null, parentRef: parentRef }, null);
+        root.render(itemForm);
+    }
+
     const deleteItem = () => {
         // const message = 'Deseja realmente excluir o item ?';
 
@@ -23,19 +32,24 @@ export const ItemSelect = ({parentRef}) => {
         .then( (response) => {
             mutate() // atualiza as opções do dropdown
             parentRef.mutate() // atualiza o componente pai
+            inventory ? setSelected(inventory.data.allItems[0].id) : setSelected(0)
         })
         .catch((error) => console.error(error))
     }
 
 	return (
-        <>
+    <>
+        <div className="flex flex-row items-center">
+            <p className="mr-2.5">Serviços: </p>
             <select onChange={(e) => setSelected(e.target.value)} >{
                 inventory ?
                 inventory.data.allItems.map( (item) => <option value={item.id} key={item.id} >{item.name}</option> ) :
                 <option value={0} key={0} >No items found</option>
             }
             </select>
-            <button onClick={deleteItem} >Retirar do Site</button>
-        </>
+            <button className="hover:bg-gray-300 hover:rounded-[50%] bg-transparent border-0 w-7 h-7" style={{'backgroundImage': 'url("icons/circle_minus.svg")'}} onClick={deleteItem} />
+            <button className="hover:bg-gray-300 hover:rounded-[50%] bg-transparent border-0 w-7 h-7" style={{'backgroundImage': 'url("icons/circle_plus.svg")'}} onClick={createItem} />
+        </div>
+    </>
     )
 }
