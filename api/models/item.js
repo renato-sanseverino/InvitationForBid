@@ -18,9 +18,9 @@ extend type Query {
 }
 
 extend type Mutation {
-  createItem(id: ID, name: String, description: String, avgPrice: Float, unitOfMeasurement: String): Int
+  createItem(name: String, description: String, avgPrice: Float, unitOfMeasurement: String): Int
   deleteItem(id: Int): Int
-  # updateItem(id: Int): Int
+  updateItem(id: Int, name: String, description: String, avgPrice: Float, unitOfMeasurement: String): Int
 }
 `
 
@@ -38,6 +38,10 @@ const resolvers = {
     },
     deleteItem: async (parent, args) => {
       const item = await prisma.item.delete({ where: { id: parseInt(args.id) }, })
+      return item.id;
+    },
+    updateItem: async (parent, args) => {
+      const item = await prisma.item.update({ where: { id: parseInt(args.id) }, data: args })
       return item.id;
     },
   }
