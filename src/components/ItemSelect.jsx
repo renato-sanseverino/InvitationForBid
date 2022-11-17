@@ -1,22 +1,11 @@
-import useSWR from 'swr'
 import ReactDom from 'react-dom'
 import React, { useState } from 'react'
-import { fetcher2 } from '../utils/defaults'
 import { mutation } from '../utils/mutation'
 import ItemForm from '../components/ItemForm'
 
 
-const query = `{
-    allItems {
-      id
-      name
-    }
-}
-`
-
-export const ItemSelect = ({parentRef}) => {
+export const ItemSelect = ({inventory, parentRef}) => {
     const [selected, setSelected] = useState(0);
-    const { data: inventory, error, isValidating, mutate } = useSWR(query, fetcher2)
 
     const createItem = () => {
         const root = ReactDom.createRoot(document.getElementById('panel'));
@@ -30,7 +19,6 @@ export const ItemSelect = ({parentRef}) => {
 
         mutation(`deleteItem`, { id: parseInt(selected) })
         .then( (response) => {
-            mutate() // atualiza as opções do dropdown
             parentRef.mutate() // atualiza o componente pai
             inventory ? setSelected(inventory.data.allItems[0].id) : setSelected(0)
         })

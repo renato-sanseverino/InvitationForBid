@@ -12,6 +12,7 @@ import { ItemDetails} from '../components/ItemDetails'
 // const url = '/api/graphql'
 const query = `{
   allItems {
+    id
     name
     description
     avgPrice
@@ -45,7 +46,7 @@ function App() {
     <Layout>
       <div>
         <p><b>FIQUE A VONTADE PARA RETIRAR DE NOSSO SITE OS SERVIÇOS QUE ACHAR INCONVENIENTE</b></p>
-        <ItemSelect parentRef={{mutate}} ></ItemSelect>
+        <ItemSelect inventory={inventory} parentRef={{mutate}} ></ItemSelect>
       </div>
 
       <div>{
