@@ -59,7 +59,7 @@ function App() {
       }
       </div>
 
-      <div>{
+      <div className="w-full h-full">{
         (inventory) ?
         <ItemDetails item={inventory.data.allItems[currentItem]} /> :
         <p>No items found</p>
