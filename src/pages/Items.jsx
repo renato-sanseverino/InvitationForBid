@@ -46,7 +46,7 @@ function App() {
     <Layout>
       <div>
         <p><b>FIQUE A VONTADE PARA RETIRAR DE NOSSO SITE OS SERVIÇOS QUE ACHAR INCONVENIENTE</b></p>
-        <ItemSelect inventory={inventory} parentRef={{mutate}} ></ItemSelect>
+        <ItemSelect inventory={inventory} parentRef={{mutate, setCurrentItem}} ></ItemSelect>
       </div>
 
       <div>{

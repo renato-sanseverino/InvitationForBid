@@ -20,7 +20,11 @@ export const ItemSelect = ({inventory, parentRef}) => {
         mutation(`deleteItem`, { id: parseInt(selected) })
         .then( (response) => {
             parentRef.mutate() // atualiza o componente pai
-            inventory ? setSelected(inventory.data.allItems[0].id) : setSelected(0)
+            if (inventory)  {
+                const firstItem = inventory.data.allItems[0]
+                setSelected(firstItem.id)
+                parentRef.setCurrentItem(firstItem.id)
+            }
         })
         .catch((error) => console.error(error))
     }
